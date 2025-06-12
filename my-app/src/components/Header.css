@@ -1,0 +1,17 @@
+.App-header {
+  text-align: center;
+  font-size: 27px;
+  animation: colorChange 3s infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    color: #151515;
+  }
+  50% {
+    color: #a63d40;
+  }
+  100% {
+    color: #151515;
+  }
+}
