@@ -1,0 +1,14 @@
+.card {
+  display: flex;
+  text-align: center;
+  width: 330px;
+  height: 316px;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  margin: 0px 0px 0px 100px;
+}
+
+.song-text {
+  white-space: pre-line;
+}
