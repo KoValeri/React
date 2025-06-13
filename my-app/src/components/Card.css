@@ -8,3 +8,7 @@
   padding: 10px;
   margin: 0px 0px 0px 100px;
 }
+
+.song-text {
+  white-space: pre-line;
+}
