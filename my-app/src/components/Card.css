@@ -12,3 +12,9 @@
 .song-text {
   white-space: pre-line;
 }
+
+.ch-box {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
