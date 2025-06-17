@@ -1,11 +1,31 @@
 import "./Card.css";
 import { useState } from "react";
 
-export default function Card() {
+export default function Card({ title, text }) {
   const [checkboxState, setCheckboxState] = useState(false);
+  const [isEditing, setIsEditing] = useState();
+  const [newTitle, setNewTitle] = useState(title);
+  const [newText, setNewText] = useState(text);
 
   function checkChange(event) {
     setCheckboxState(event.target.checked);
+  }
+
+  function editCard() {
+    setIsEditing(true);
+    if (checkboxState) {
+      setCheckboxState(false);
+    }
+  }
+
+  function saveEditedCard() {
+    setIsEditing(false);
+  }
+
+  function exitFromEditing() {
+    setNewTitle(title);
+    setNewText(text);
+    setIsEditing(false);
   }
 
   return (
@@ -13,20 +33,53 @@ export default function Card() {
       className="card"
       style={{ backgroundColor: checkboxState ? "#a63d40" : "white" }}
     >
-      <h2 className="song-name">Until Eternity</h2>
-      <p className="song-text">
-        {`I loved you once, I loved you twice
-      I loved you in my previous lives
-      I know your voice, I know your eyes
-      You haunt me through my dreams at night
-      Oh my love we'll meet again
-      We always do in the end
-      Our two souls destined to be
-      You and I until eternity`}
-      </p>
-      <div className="ch-box">
+      {isEditing ? (
+        <div className="editing">
+          <input
+            type="text"
+            value={newTitle}
+            onChange={(event) => setNewTitle(event.target.value)}
+          />
+          <textarea
+            value={newText}
+            onChange={(event) => setNewText(event.target.value)}
+          ></textarea>
+        </div>
+      ) : (
+        <div>
+          <h2 className="song-name">{newTitle}</h2>
+          <p className="song-text">{newText}</p>
+        </div>
+      )}
+      <div className="ch-box" style={{ display: isEditing ? "none" : "flex" }}>
         <input type="checkbox" onChange={checkChange}></input>
         <label>Click me!</label>
+      </div>
+      <div
+        className="edit"
+        style={{ margin: isEditing ? "82px 0px 0px 0px" : "40px 0px 0px 0px" }}
+      >
+        <button
+          className="save-button"
+          style={{ display: isEditing ? "flex" : "none" }}
+          onClick={saveEditedCard}
+        >
+          Save
+        </button>
+        <button
+          className="exit-button"
+          style={{ display: isEditing ? "flex" : "none" }}
+          onClick={exitFromEditing}
+        >
+          Exit
+        </button>
+        <button
+          className="edit-button"
+          style={{ display: isEditing ? "none" : "flex" }}
+          onClick={editCard}
+        >
+          Edit
+        </button>
       </div>
     </div>
   );
