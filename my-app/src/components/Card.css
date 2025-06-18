@@ -16,6 +16,7 @@
 .ch-box {
   justify-content: flex-end;
   padding: 10px;
+  display: flex;
 }
 
 .edit {

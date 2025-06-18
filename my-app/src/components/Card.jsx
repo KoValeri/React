@@ -6,6 +6,8 @@ export default function Card({ title, text }) {
   const [isEditing, setIsEditing] = useState();
   const [newTitle, setNewTitle] = useState(title);
   const [newText, setNewText] = useState(text);
+  const [previousTitle, setPreviousTitle] = useState(title);
+  const [previousText, setPreviousText] = useState(text);
 
   function checkChange(event) {
     setCheckboxState(event.target.checked);
@@ -20,11 +22,13 @@ export default function Card({ title, text }) {
 
   function saveEditedCard() {
     setIsEditing(false);
+    setPreviousTitle(newTitle);
+    setPreviousText(newText);
   }
 
   function exitFromEditing() {
-    setNewTitle(title);
-    setNewText(text);
+    setNewTitle(previousTitle);
+    setNewText(previousText);
     setIsEditing(false);
   }
 
@@ -51,35 +55,30 @@ export default function Card({ title, text }) {
           <p className="song-text">{newText}</p>
         </div>
       )}
-      <div className="ch-box" style={{ display: isEditing ? "none" : "flex" }}>
-        <input type="checkbox" onChange={checkChange}></input>
-        <label>Click me!</label>
-      </div>
+      {!isEditing && (
+        <div className="ch-box">
+          <input type="checkbox" onChange={checkChange} />
+          <label>Click me!</label>
+        </div>
+      )}
       <div
         className="edit"
         style={{ margin: isEditing ? "82px 0px 0px 0px" : "40px 0px 0px 0px" }}
       >
-        <button
-          className="save-button"
-          style={{ display: isEditing ? "flex" : "none" }}
-          onClick={saveEditedCard}
-        >
-          Save
-        </button>
-        <button
-          className="exit-button"
-          style={{ display: isEditing ? "flex" : "none" }}
-          onClick={exitFromEditing}
-        >
-          Exit
-        </button>
-        <button
-          className="edit-button"
-          style={{ display: isEditing ? "none" : "flex" }}
-          onClick={editCard}
-        >
-          Edit
-        </button>
+        {isEditing ? (
+          <>
+            <button className="save-button" onClick={saveEditedCard}>
+              Save
+            </button>
+            <button className="exit-button" onClick={exitFromEditing}>
+              Exit
+            </button>
+          </>
+        ) : (
+          <button className="edit-button" onClick={editCard}>
+            Edit
+          </button>
+        )}
       </div>
     </div>
   );
