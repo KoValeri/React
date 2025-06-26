@@ -9,8 +9,8 @@ main {
 }
 
 .cards {
-  display: grid;
-  grid-template-columns: repeat(3, 410px);
+  display: flex;
   grid-gap: 90px;
   justify-content: center;
+  flex-wrap: wrap;
 }

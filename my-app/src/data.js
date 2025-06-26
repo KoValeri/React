@@ -1,6 +1,6 @@
 export const songCards = [
   {
-    title: "Until Eternity",
+    title: 'Until Eternity',
     text: `I loved you once, I loved you twice
 I loved you in my previous lives
 I know your voice, I know your eyes
@@ -11,7 +11,7 @@ Our two souls destined to be
 You and I until eternity`,
   },
   {
-    title: "Demons",
+    title: 'Demons',
     text: `When you feel my heat, look into my eyes
 It's where my demons hide
 Don't get too close, it's dark inside
@@ -22,7 +22,7 @@ Your eyes, they shine so bright, I wanna save that light
 I can't escape this now (unless you show me how)`,
   },
   {
-    title: "Back From The Dead",
+    title: 'Back From The Dead',
     text: `Back from the dead alive
 Hell couldn't hold me
 Back from the other side
@@ -33,7 +33,7 @@ Back from the dead alive
 Hell couldn't hold me down`,
   },
   {
-    title: "Falling Forever",
+    title: 'Falling Forever',
     text: `Are you good at holdin' on?
 I know the mind is quick to throw away the moment
 Where this takes us, maybe I don't wanna know yet
@@ -44,7 +44,7 @@ I hope the feelings that you give me carry over
 'Til tomorrow and beyond`,
   },
   {
-    title: "This Is The Life",
+    title: 'This Is The Life',
     text: `Oh the wind whistles down
 The cold dark street tonight
 And the people they were dancing
@@ -55,7 +55,7 @@ And the songs get louder each one better than before
 And you singing the song thinking this is the life`,
   },
   {
-    title: "No Longer You",
+    title: 'No Longer You',
     text: `I see a song of past romance
 I see the sacrifice of man
 I see portrayals of betrayal
@@ -66,7 +66,7 @@ I see a man who gets to make it home alive
 But it's no longer you`,
   },
   {
-    title: "Master Of Puppets",
+    title: 'Master Of Puppets',
     text: `End of passion play, crumbling away
 I'm your source of self-destruction
 Veins that pump with fear, sucking darkest clear

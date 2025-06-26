@@ -1,6 +1,6 @@
-import "./Card.css";
-import { useState } from "react";
-import { useEffect } from "react";
+import './Card.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Card({ title, text, viewOnly }) {
   const [checkboxState, setCheckboxState] = useState(false);
@@ -42,21 +42,11 @@ export default function Card({ title, text, viewOnly }) {
   }, [viewOnly, isEditing, previousTitle, previousText]);
 
   return (
-    <div
-      className="card"
-      style={{ backgroundColor: checkboxState ? "#a63d40" : "white" }}
-    >
+    <div className="card" style={{ backgroundColor: checkboxState ? '#a63d40' : 'white' }}>
       {isEditing ? (
         <div className="editing">
-          <input
-            type="text"
-            value={newTitle}
-            onChange={(event) => setNewTitle(event.target.value)}
-          />
-          <textarea
-            value={newText}
-            onChange={(event) => setNewText(event.target.value)}
-          ></textarea>
+          <input type="text" value={newTitle} onChange={event => setNewTitle(event.target.value)} />
+          <textarea value={newText} onChange={event => setNewText(event.target.value)}></textarea>
         </div>
       ) : (
         <div>
@@ -74,7 +64,7 @@ export default function Card({ title, text, viewOnly }) {
         <div
           className="edit"
           style={{
-            margin: isEditing ? "82px 0px 0px 0px" : "40px 0px 0px 0px",
+            margin: isEditing ? '82px 0px 0px 0px' : '40px 0px 0px 0px',
           }}
         >
           {isEditing ? (
