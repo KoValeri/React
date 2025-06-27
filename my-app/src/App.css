@@ -1,0 +1,16 @@
+main {
+  height: 1300px;
+}
+
+.view-only {
+  margin: 0px 0px 25px 49px;
+  font-weight: bold;
+  color: #a63d40;
+}
+
+.cards {
+  display: flex;
+  grid-gap: 90px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
