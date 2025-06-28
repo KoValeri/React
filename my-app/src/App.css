@@ -8,6 +8,17 @@ main {
   color: #a63d40;
 }
 
+.delete-button {
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #a63d40;
+  width: 70px;
+  height: 41px;
+  color: black;
+  border: none;
+  margin: 78px 0px 40px 55px;
+}
+
 .cards {
   display: flex;
   grid-gap: 90px;

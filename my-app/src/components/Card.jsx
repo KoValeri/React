@@ -1,8 +1,10 @@
 import './Card.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import CardLyrics from './CardLyrics.jsx';
+import CardFunctionality from './CardFunctionality.jsx';
 
-export default function Card({ title, text, viewOnly }) {
+export default function Card({ title, text, viewOnly, getSelectedCards }) {
   const [checkboxState, setCheckboxState] = useState(false);
   const [isEditing, setIsEditing] = useState();
   const [newTitle, setNewTitle] = useState(title);
@@ -11,7 +13,9 @@ export default function Card({ title, text, viewOnly }) {
   const [previousText, setPreviousText] = useState(text);
 
   function checkChange(event) {
-    setCheckboxState(event.target.checked);
+    const isChecked = event.target.checked;
+    setCheckboxState(isChecked);
+    getSelectedCards(isChecked);
   }
 
   function editCard() {
@@ -43,46 +47,21 @@ export default function Card({ title, text, viewOnly }) {
 
   return (
     <div className="card" style={{ backgroundColor: checkboxState ? '#a63d40' : 'white' }}>
-      {isEditing ? (
-        <div className="editing">
-          <input type="text" value={newTitle} onChange={event => setNewTitle(event.target.value)} />
-          <textarea value={newText} onChange={event => setNewText(event.target.value)}></textarea>
-        </div>
-      ) : (
-        <div>
-          <h2 className="song-name">{newTitle}</h2>
-          <p className="song-text">{newText}</p>
-        </div>
-      )}
-      {!isEditing && (
-        <div className="ch-box">
-          <input type="checkbox" onChange={checkChange} />
-          <label>Click me!</label>
-        </div>
-      )}
-      {!viewOnly && (
-        <div
-          className="edit"
-          style={{
-            margin: isEditing ? '82px 0px 0px 0px' : '40px 0px 0px 0px',
-          }}
-        >
-          {isEditing ? (
-            <>
-              <button className="save-button" onClick={saveEditedCard}>
-                Save
-              </button>
-              <button className="exit-button" onClick={exitFromEditing}>
-                Exit
-              </button>
-            </>
-          ) : (
-            <button className="edit-button" onClick={editCard}>
-              Edit
-            </button>
-          )}
-        </div>
-      )}
+      <CardLyrics
+        isEditing={isEditing}
+        newTitle={newTitle}
+        newText={newText}
+        setNewTitle={setNewTitle}
+        setNewText={setNewText}
+      />
+      <CardFunctionality
+        checkChange={checkChange}
+        isEditing={isEditing}
+        viewOnly={viewOnly}
+        saveEditedCard={saveEditedCard}
+        exitFromEditing={exitFromEditing}
+        editCard={editCard}
+      />
     </div>
   );
 }
