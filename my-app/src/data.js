@@ -1,5 +1,6 @@
 export const songCards = [
   {
+    id: 1,
     title: 'Until Eternity',
     text: `I loved you once, I loved you twice
 I loved you in my previous lives
@@ -11,6 +12,7 @@ Our two souls destined to be
 You and I until eternity`,
   },
   {
+    id: 2,
     title: 'Demons',
     text: `When you feel my heat, look into my eyes
 It's where my demons hide
@@ -22,6 +24,7 @@ Your eyes, they shine so bright, I wanna save that light
 I can't escape this now (unless you show me how)`,
   },
   {
+    id: 3,
     title: 'Back From The Dead',
     text: `Back from the dead alive
 Hell couldn't hold me
@@ -33,6 +36,7 @@ Back from the dead alive
 Hell couldn't hold me down`,
   },
   {
+    id: 4,
     title: 'Falling Forever',
     text: `Are you good at holdin' on?
 I know the mind is quick to throw away the moment
@@ -44,6 +48,7 @@ I hope the feelings that you give me carry over
 'Til tomorrow and beyond`,
   },
   {
+    id: 5,
     title: 'This Is The Life',
     text: `Oh the wind whistles down
 The cold dark street tonight
@@ -55,6 +60,7 @@ And the songs get louder each one better than before
 And you singing the song thinking this is the life`,
   },
   {
+    id: 6,
     title: 'No Longer You',
     text: `I see a song of past romance
 I see the sacrifice of man
@@ -66,6 +72,7 @@ I see a man who gets to make it home alive
 But it's no longer you`,
   },
   {
+    id: 7,
     title: 'Master Of Puppets',
     text: `End of passion play, crumbling away
 I'm your source of self-destruction

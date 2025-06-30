@@ -1,14 +1,27 @@
 import './App.css';
 import { useState } from 'react';
 import Header from './components/Header.jsx';
-import Card from './components/Card.jsx';
+import CardList from './components/CardList.jsx';
 import { songCards } from './data.js';
 
 function App() {
   const [viewOnly, setViewOnly] = useState(false);
+  const [selectedCards, setSelectedCards] = useState([]);
+  const [songs, setSongs] = useState(songCards);
 
   function checkView(event) {
     setViewOnly(event.target.checked);
+  }
+
+  function getSelectedCards(id, isChecked) {
+    setSelectedCards(prev => {
+      return isChecked ? [id, ...prev] : prev.filter(cardID => cardID !== id);
+    });
+  }
+
+  function deleteSelectedCards() {
+    setSongs(prevSongs => prevSongs.filter(song => !selectedCards.includes(song.id)));
+    setSelectedCards([]);
   }
 
   return (
@@ -20,9 +33,12 @@ function App() {
       </div>
       <main>
         <div className="cards">
-          {songCards.map(songCard => (
-            <Card key={songCard.title} {...songCard} viewOnly={viewOnly} />
-          ))}
+          <CardList songs={songs} viewOnly={viewOnly} getSelectedCards={getSelectedCards} />
+        </div>
+        <div>
+          <button className="delete-button" onClick={deleteSelectedCards}>
+            Delete
+          </button>
         </div>
       </main>
     </div>
