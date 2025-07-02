@@ -7,6 +7,10 @@
   padding: 10px;
 }
 
+.song-name {
+  height: 32px;
+}
+
 .song-text {
   white-space: pre-line;
   height: 175px;
