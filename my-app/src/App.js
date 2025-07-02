@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import { useState } from 'react';
 import Header from './components/Header.jsx';
@@ -24,12 +25,26 @@ function App() {
     setSelectedCards([]);
   }
 
+  function addCard() {
+    const newCard = {
+      id: uuidv4(),
+      title: 'Song tittle... ',
+      text: `Song text... `,
+    };
+    setSongs(prevSongs => [newCard, ...prevSongs]);
+  }
+
   return (
     <div>
       <Header />
       <div className="view-only">
         <input type="checkbox" onChange={checkView} />
         <label>View only</label>
+      </div>
+      <div>
+        <button className="add-card" onClick={addCard}>
+          Add card
+        </button>
       </div>
       <main>
         <div className="cards">

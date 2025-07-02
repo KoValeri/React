@@ -8,6 +8,17 @@ main {
   color: #a63d40;
 }
 
+.add-card {
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: white;
+  border: solid 2px #a63d40;
+  width: 70px;
+  height: 41px;
+  color: black;
+  margin: 8px 0px 40px 55px;
+}
+
 .delete-button {
   border-radius: 5px;
   cursor: pointer;
