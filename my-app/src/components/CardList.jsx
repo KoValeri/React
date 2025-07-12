@@ -1,11 +1,14 @@
 import Card from './Card.jsx';
+import WithLoadingDelay from './WithLoadingDelay.jsx';
 import '../App.css';
+
+const CardWithLoading = WithLoadingDelay(Card);
 
 export default function CardList({ viewOnly, songs, getSelectedCards }) {
   return (
     <div className="cards">
       {songs.map(songCard => (
-        <Card
+        <CardWithLoading
           key={songCard.id}
           {...songCard}
           viewOnly={viewOnly}
