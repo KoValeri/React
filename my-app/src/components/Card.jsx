@@ -1,4 +1,5 @@
 import './Card.css';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import CardLyrics from './CardLyrics.jsx';
@@ -65,3 +66,10 @@ export default function Card({ title, text, viewOnly, getSelectedCards }) {
     </div>
   );
 }
+
+Card.propTypes = {
+  title: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  viewOnly: PropTypes.bool,
+  getSelectedCards: PropTypes.func,
+};
