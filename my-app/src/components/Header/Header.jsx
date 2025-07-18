@@ -1,14 +1,9 @@
 import './Header.css';
 import { SongContext } from '../../app_context/song-context.jsx';
 import { useContext } from 'react';
-import PropTypes from 'prop-types';
 
-export default function Header({ setViewOnly }) {
-  const { count, deleteSelectedCards, addCard } = useContext(SongContext);
-
-  function checkView(event) {
-    setViewOnly(event.target.checked);
-  }
+export default function Header() {
+  const { count, deleteSelectedCards, addCard, checkView } = useContext(SongContext);
 
   return (
     <header className="app-header">
@@ -41,7 +36,3 @@ export default function Header({ setViewOnly }) {
     </header>
   );
 }
-
-Header.propTypes = {
-  setViewOnly: PropTypes.func.isRequired,
-};

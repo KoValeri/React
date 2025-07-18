@@ -10,6 +10,7 @@ Oh my love we'll meet again
 We always do in the end
 Our two souls destined to be
 You and I until eternity`,
+    isChecked: false,
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ They say it's what you make, I say it's up to fate
 It's woven in my soul, I need to let you go
 Your eyes, they shine so bright, I wanna save that light
 I can't escape this now (unless you show me how)`,
+    isChecked: false,
   },
   {
     id: 3,
@@ -34,6 +36,7 @@ Save your prayers, don't bless my bones
 Erase my name from my headstone
 Back from the dead alive
 Hell couldn't hold me down`,
+    isChecked: false,
   },
   {
     id: 4,
@@ -46,6 +49,7 @@ They say you got it, then it's gone
 I don't believe that every flame has to get colder
 I hope the feelings that you give me carry over
 'Til tomorrow and beyond`,
+    isChecked: false,
   },
   {
     id: 5,
@@ -58,6 +62,7 @@ And the boys chase the girls, with curls in their hair
 While the shocked too many sit way over there
 And the songs get louder each one better than before
 And you singing the song thinking this is the life`,
+    isChecked: false,
   },
   {
     id: 6,
@@ -70,6 +75,7 @@ I see you on the brink of death
 I see you draw your final breath
 I see a man who gets to make it home alive
 But it's no longer you`,
+    isChecked: false,
   },
   {
     id: 7,
@@ -82,5 +88,6 @@ Taste me, you will see
 More is all you need
 Dedicated to
 How I'm killing you`,
+    isChecked: false,
   },
 ];

@@ -5,17 +5,22 @@ import { v4 as uuidv4 } from 'uuid';
 export const SongContext = createContext({
   songs: [],
   count: 0,
-  getSelectedCards: () => {},
+  updateSelectedCard: () => {},
   deleteSelectedCards: () => {},
   addCard: () => {},
+  checkView: () => {},
+  viewOnly: false,
 });
 
 export default function SongContextProvider({ children }) {
-  const [songs, setSongs] = useState(
-    songCards.map(songCard => ({ ...songCard, isChecked: false }))
-  );
+  const [viewOnly, setViewOnly] = useState(false);
+  const [songs, setSongs] = useState(songCards);
 
-  function getSelectedCards(id, isChecked) {
+  function checkView(event) {
+    setViewOnly(event.target.checked);
+  }
+
+  function updateSelectedCard(id, isChecked) {
     setSongs(prev => {
       return prev.map(pr => (id === pr.id ? { ...pr, isChecked } : pr));
     });
@@ -38,11 +43,13 @@ export default function SongContextProvider({ children }) {
   const count = songs.length;
 
   const ctxValue = {
-    getSelectedCards,
+    updateSelectedCard,
     deleteSelectedCards,
     addCard,
     count,
     songs,
+    checkView,
+    viewOnly,
   };
 
   return <SongContext.Provider value={ctxValue}>{children}</SongContext.Provider>;
