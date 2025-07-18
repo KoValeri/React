@@ -1,4 +1,5 @@
 import './Card.css';
+import PropTypes from 'prop-types';
 
 export default function CardLyrics({ isEditing, newTitle, newText, setNewTitle, setNewText }) {
   return (
@@ -17,3 +18,11 @@ export default function CardLyrics({ isEditing, newTitle, newText, setNewTitle, 
     </>
   );
 }
+
+CardLyrics.propTypes = {
+  isEditing: PropTypes.bool,
+  newTitle: PropTypes.string.isRequired,
+  newText: PropTypes.string.isRequired,
+  setNewTitle: PropTypes.func.isRequired,
+  setNewText: PropTypes.func.isRequired,
+};

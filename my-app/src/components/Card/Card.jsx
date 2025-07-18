@@ -1,10 +1,13 @@
 import './Card.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useState, useEffect, useContext } from 'react';
 import CardLyrics from './CardLyrics.jsx';
 import CardFunctionality from './CardFunctionality.jsx';
+import { SongContext } from '../../app_context/song-context.jsx';
 
-export default function Card({ title, text, viewOnly, getSelectedCards }) {
+export default function Card({ id, title, text }) {
+  const { viewOnly, updateSelectedCard } = useContext(SongContext);
+
   const [checkboxState, setCheckboxState] = useState(false);
   const [isEditing, setIsEditing] = useState();
   const [newTitle, setNewTitle] = useState(title);
@@ -15,7 +18,7 @@ export default function Card({ title, text, viewOnly, getSelectedCards }) {
   function checkChange(event) {
     const isChecked = event.target.checked;
     setCheckboxState(isChecked);
-    getSelectedCards(isChecked);
+    updateSelectedCard(id, isChecked);
   }
 
   function editCard() {
@@ -35,6 +38,7 @@ export default function Card({ title, text, viewOnly, getSelectedCards }) {
     setNewTitle(previousTitle);
     setNewText(previousText);
     setIsEditing(false);
+    updateSelectedCard(id, false);
   }
 
   useEffect(() => {
@@ -65,3 +69,9 @@ export default function Card({ title, text, viewOnly, getSelectedCards }) {
     </div>
   );
 }
+
+Card.propTypes = {
+  title: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+};
