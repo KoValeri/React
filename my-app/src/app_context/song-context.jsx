@@ -11,18 +11,18 @@ export const SongContext = createContext({
 });
 
 export default function SongContextProvider({ children }) {
-  const [selectedCards, setSelectedCards] = useState([]);
-  const [songs, setSongs] = useState(songCards);
+  const [songs, setSongs] = useState(
+    songCards.map(songCard => ({ ...songCard, isChecked: false }))
+  );
 
   function getSelectedCards(id, isChecked) {
-    setSelectedCards(prev => {
-      return isChecked ? [id, ...prev] : prev.filter(cardID => cardID !== id);
+    setSongs(prev => {
+      return prev.map(pr => (id === pr.id ? { ...pr, isChecked } : pr));
     });
   }
 
   function deleteSelectedCards() {
-    setSongs(prevSongs => prevSongs.filter(song => !selectedCards.includes(song.id)));
-    setSelectedCards([]);
+    setSongs(prev => prev.filter(song => !song.isChecked));
   }
 
   function addCard() {
@@ -30,6 +30,7 @@ export default function SongContextProvider({ children }) {
       id: uuidv4(),
       title: 'Song tittle... ',
       text: `Song text... `,
+      isChecked: false,
     };
     setSongs(prevSongs => [newCard, ...prevSongs]);
   }

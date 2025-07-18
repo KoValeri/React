@@ -1,4 +1,5 @@
 import './Card.css';
+import PropTypes from 'prop-types';
 
 export default function CardFunctionality({
   checkChange,
@@ -42,3 +43,12 @@ export default function CardFunctionality({
     </>
   );
 }
+
+CardFunctionality.propTypes = {
+  checkChange: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool,
+  viewOnly: PropTypes.bool,
+  saveEditedCard: PropTypes.func.isRequired,
+  exitFromEditing: PropTypes.func.isRequired,
+  editCard: PropTypes.func.isRequired,
+};

@@ -1,8 +1,9 @@
-import Card from './Card.jsx';
-import WithLoadingDelay from './WithLoadingDelay.jsx';
-import '../App.css';
-import { SongContext } from '../app_context/song-context.jsx';
+import Card from '../Card/Card.jsx';
+import WithLoadingDelay from '../Loading/WithLoadingDelay.jsx';
+import '../../App.css';
+import { SongContext } from '../../app_context/song-context.jsx';
 import { useContext } from 'react';
+import PropTypes from 'prop-types';
 
 const CardWithLoading = WithLoadingDelay(Card);
 
@@ -24,3 +25,7 @@ export default function CardList({ viewOnly }) {
     </div>
   );
 }
+
+CardList.propTypes = {
+  viewOnly: PropTypes.bool,
+};
