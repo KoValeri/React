@@ -1,11 +1,9 @@
 import './Card.css';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import CardLyrics from './CardLyrics.jsx';
 import CardFunctionality from './CardFunctionality.jsx';
 import { SongContext } from '../../app_context/song-context.jsx';
-import { useContext } from 'react';
 
 export default function Card({ id, title, text }) {
   const { viewOnly, updateSelectedCard } = useContext(SongContext);
@@ -40,6 +38,7 @@ export default function Card({ id, title, text }) {
     setNewTitle(previousTitle);
     setNewText(previousText);
     setIsEditing(false);
+    updateSelectedCard(id, false);
   }
 
   useEffect(() => {
