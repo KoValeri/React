@@ -19,8 +19,8 @@ export default function Header() {
 
       <div className="buttons">
         <div className="view-only">
-          <input type="checkbox" onChange={checkView} />
-          <label>View only</label>
+          <input id="view-only-checkbox" type="checkbox" onChange={checkView} />
+          <label for="view-only-checkbox">View only</label>
         </div>
         <div>
           <button className="add-card" onClick={addCard}>

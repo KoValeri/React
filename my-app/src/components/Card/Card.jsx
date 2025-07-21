@@ -15,15 +15,13 @@ export default function Card({ id, title, text, isChecked }) {
   const [previousText, setPreviousText] = useState(text);
 
   function checkChange(event) {
-    isChecked = event.target.checked;
-    updateSelectedCard(id, isChecked);
+    updateSelectedCard(id, event.target.checked);
   }
 
   function editCard() {
     setIsEditing(true);
     if (isChecked) {
-      isChecked = false;
-      updateSelectedCard(id, isChecked);
+      updateSelectedCard(id, false);
     }
   }
 
@@ -63,6 +61,8 @@ export default function Card({ id, title, text, isChecked }) {
         saveEditedCard={saveEditedCard}
         exitFromEditing={exitFromEditing}
         editCard={editCard}
+        id={id}
+        isChecked={isChecked}
       />
     </div>
   );

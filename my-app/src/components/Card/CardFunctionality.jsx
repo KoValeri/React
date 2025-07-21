@@ -8,13 +8,20 @@ export default function CardFunctionality({
   saveEditedCard,
   exitFromEditing,
   editCard,
+  id,
+  isChecked,
 }) {
   return (
     <>
       {!isEditing && (
         <div className="ch-box">
-          <input type="checkbox" onChange={checkChange} />
-          <label>Choose me!</label>
+          <input
+            id={`card-checkbox-${id}`}
+            type="checkbox"
+            onChange={checkChange}
+            checked={isChecked}
+          />
+          <label for={`card-checkbox-${id}`}>Choose me!</label>
         </div>
       )}
       {!viewOnly && (
