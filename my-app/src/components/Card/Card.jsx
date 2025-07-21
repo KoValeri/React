@@ -5,10 +5,9 @@ import CardLyrics from './CardLyrics.jsx';
 import CardFunctionality from './CardFunctionality.jsx';
 import { SongContext } from '../../app_context/song-context.jsx';
 
-export default function Card({ id, title, text }) {
+export default function Card({ id, title, text, isChecked }) {
   const { viewOnly, updateSelectedCard } = useContext(SongContext);
 
-  const [checkboxState, setCheckboxState] = useState(false);
   const [isEditing, setIsEditing] = useState();
   const [newTitle, setNewTitle] = useState(title);
   const [newText, setNewText] = useState(text);
@@ -16,15 +15,15 @@ export default function Card({ id, title, text }) {
   const [previousText, setPreviousText] = useState(text);
 
   function checkChange(event) {
-    const isChecked = event.target.checked;
-    setCheckboxState(isChecked);
+    isChecked = event.target.checked;
     updateSelectedCard(id, isChecked);
   }
 
   function editCard() {
     setIsEditing(true);
-    if (checkboxState) {
-      setCheckboxState(false);
+    if (isChecked) {
+      isChecked = false;
+      updateSelectedCard(id, isChecked);
     }
   }
 
@@ -38,7 +37,6 @@ export default function Card({ id, title, text }) {
     setNewTitle(previousTitle);
     setNewText(previousText);
     setIsEditing(false);
-    updateSelectedCard(id, false);
   }
 
   useEffect(() => {
@@ -50,7 +48,7 @@ export default function Card({ id, title, text }) {
   }, [viewOnly, isEditing, previousTitle, previousText]);
 
   return (
-    <div className="card" style={{ backgroundColor: checkboxState ? '#a63d40' : 'white' }}>
+    <div className="card" style={{ backgroundColor: isChecked ? '#a63d40' : 'white' }}>
       <CardLyrics
         isEditing={isEditing}
         newTitle={newTitle}
