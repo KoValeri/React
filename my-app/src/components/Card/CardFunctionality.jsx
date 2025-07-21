@@ -58,4 +58,6 @@ CardFunctionality.propTypes = {
   saveEditedCard: PropTypes.func.isRequired,
   exitFromEditing: PropTypes.func.isRequired,
   editCard: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  isChecked: PropTypes.bool.isRequired,
 };

@@ -72,4 +72,5 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  isChecked: PropTypes.bool.isRequired,
 };
