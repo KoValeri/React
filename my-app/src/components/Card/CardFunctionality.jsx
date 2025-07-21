@@ -1,4 +1,5 @@
 import './Card.css';
+import PropTypes from 'prop-types';
 
 export default function CardFunctionality({
   checkChange,
@@ -7,13 +8,20 @@ export default function CardFunctionality({
   saveEditedCard,
   exitFromEditing,
   editCard,
+  id,
+  isChecked,
 }) {
   return (
     <>
       {!isEditing && (
         <div className="ch-box">
-          <input type="checkbox" onChange={checkChange} />
-          <label>Choose me!</label>
+          <input
+            id={`card-checkbox-${id}`}
+            type="checkbox"
+            onChange={checkChange}
+            checked={isChecked}
+          />
+          <label for={`card-checkbox-${id}`}>Choose me!</label>
         </div>
       )}
       {!viewOnly && (
@@ -42,3 +50,14 @@ export default function CardFunctionality({
     </>
   );
 }
+
+CardFunctionality.propTypes = {
+  checkChange: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool,
+  viewOnly: PropTypes.bool,
+  saveEditedCard: PropTypes.func.isRequired,
+  exitFromEditing: PropTypes.func.isRequired,
+  editCard: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  isChecked: PropTypes.bool.isRequired,
+};

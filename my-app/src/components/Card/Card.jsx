@@ -1,11 +1,13 @@
 import './Card.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useState, useEffect, useContext } from 'react';
 import CardLyrics from './CardLyrics.jsx';
 import CardFunctionality from './CardFunctionality.jsx';
+import { SongContext } from '../../app_context/song-context.jsx';
 
-export default function Card({ title, text, viewOnly, getSelectedCards }) {
-  const [checkboxState, setCheckboxState] = useState(false);
+export default function Card({ id, title, text, isChecked }) {
+  const { viewOnly, updateSelectedCard } = useContext(SongContext);
+
   const [isEditing, setIsEditing] = useState();
   const [newTitle, setNewTitle] = useState(title);
   const [newText, setNewText] = useState(text);
@@ -13,15 +15,13 @@ export default function Card({ title, text, viewOnly, getSelectedCards }) {
   const [previousText, setPreviousText] = useState(text);
 
   function checkChange(event) {
-    const isChecked = event.target.checked;
-    setCheckboxState(isChecked);
-    getSelectedCards(isChecked);
+    updateSelectedCard(id, event.target.checked);
   }
 
   function editCard() {
     setIsEditing(true);
-    if (checkboxState) {
-      setCheckboxState(false);
+    if (isChecked) {
+      updateSelectedCard(id, false);
     }
   }
 
@@ -46,7 +46,7 @@ export default function Card({ title, text, viewOnly, getSelectedCards }) {
   }, [viewOnly, isEditing, previousTitle, previousText]);
 
   return (
-    <div className="card" style={{ backgroundColor: checkboxState ? '#a63d40' : 'white' }}>
+    <div className="card" style={{ backgroundColor: isChecked ? '#a63d40' : 'white' }}>
       <CardLyrics
         isEditing={isEditing}
         newTitle={newTitle}
@@ -61,7 +61,16 @@ export default function Card({ title, text, viewOnly, getSelectedCards }) {
         saveEditedCard={saveEditedCard}
         exitFromEditing={exitFromEditing}
         editCard={editCard}
+        id={id}
+        isChecked={isChecked}
       />
     </div>
   );
 }
+
+Card.propTypes = {
+  title: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  isChecked: PropTypes.bool.isRequired,
+};
