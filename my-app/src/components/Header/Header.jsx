@@ -1,9 +1,10 @@
 import './Header.css';
 import { SongContext } from '../../app_context/song-context.jsx';
 import { useContext } from 'react';
+import ViewOnlyCheckbox from './ViewOnlyCheckbox.jsx';
 
 export default function Header() {
-  const { count, deleteSelectedCards, addCard, checkView } = useContext(SongContext);
+  const { count, deleteSelectedCards, addCard } = useContext(SongContext);
 
   return (
     <header className="app-header">
@@ -18,10 +19,7 @@ export default function Header() {
       </div>
 
       <div className="buttons">
-        <div className="view-only">
-          <input id="view-only-checkbox" type="checkbox" onChange={checkView} />
-          <label for="view-only-checkbox">View only</label>
-        </div>
+        <ViewOnlyCheckbox />
         <div>
           <button className="add-card" onClick={addCard}>
             Add card
