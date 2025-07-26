@@ -54,12 +54,6 @@
   align-items: center;
 }
 
-.view-only {
-  margin: 0px 20px 0px 0px;
-  font-weight: bold;
-  color: #a63d40;
-}
-
 .add-card,
 .delete-button {
   border-radius: 5px;
