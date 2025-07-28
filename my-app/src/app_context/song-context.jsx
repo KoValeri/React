@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 export const SongContext = createContext({
   songs: [],
@@ -18,15 +19,12 @@ export default function SongContextProvider({ children }) {
   useEffect(() => {
     async function fetchSongs() {
       try {
-        const response = await fetch(
+        const response = await axios.get(
           'https://raw.githubusercontent.com/KoValeri/Data/main/SongData.json'
         );
-        if (!response.ok) throw new Error('Problem with getting list of songs');
-        const resData = await response.json();
-
-        setSongs(resData);
+        setSongs(response.data);
       } catch (error) {
-        console.log(`${error.message}`);
+        console.log('Problem with getting list of songs', error);
       }
     }
 
