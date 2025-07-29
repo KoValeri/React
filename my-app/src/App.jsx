@@ -9,7 +9,7 @@ function App() {
       <SongContextProvider>
         <Header />
         <main>
-          <div>
+          <div className="cards-block">
             <CardList />
           </div>
         </main>

@@ -1,6 +1,6 @@
-import { createContext, useState } from 'react';
-import { songCards } from '../data.js';
+import { createContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 export const SongContext = createContext({
   songs: [],
@@ -14,7 +14,22 @@ export const SongContext = createContext({
 
 export default function SongContextProvider({ children }) {
   const [viewOnly, setViewOnly] = useState(false);
-  const [songs, setSongs] = useState(songCards);
+  const [songs, setSongs] = useState([]);
+
+  useEffect(() => {
+    async function fetchSongs() {
+      try {
+        const response = await axios.get(
+          'https://raw.githubusercontent.com/KoValeri/Data/main/SongData.json'
+        );
+        setSongs(response.data);
+      } catch (error) {
+        console.log('Problem with getting list of songs', error);
+      }
+    }
+
+    fetchSongs();
+  }, []);
 
   function checkView(event) {
     setViewOnly(event.target.checked);
