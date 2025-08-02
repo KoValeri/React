@@ -5,9 +5,9 @@ export default function CardFunctionality({
   checkChange,
   isEditing,
   viewOnly,
-  saveEditedCard,
-  exitFromEditing,
-  editCard,
+  saveEditedCardHandler,
+  exitFromEditingHandler,
+  editCardHandler,
   id,
   isChecked,
 }) {
@@ -33,15 +33,15 @@ export default function CardFunctionality({
         >
           {isEditing ? (
             <>
-              <button className="save-button" onClick={saveEditedCard}>
+              <button className="save-button" onClick={saveEditedCardHandler}>
                 Save
               </button>
-              <button className="exit-button" onClick={exitFromEditing}>
+              <button className="exit-button" onClick={exitFromEditingHandler}>
                 Exit
               </button>
             </>
           ) : (
-            <button className="edit-button" onClick={editCard}>
+            <button className="edit-button" onClick={editCardHandler}>
               Edit
             </button>
           )}
@@ -55,9 +55,9 @@ CardFunctionality.propTypes = {
   checkChange: PropTypes.func.isRequired,
   isEditing: PropTypes.bool,
   viewOnly: PropTypes.bool,
-  saveEditedCard: PropTypes.func.isRequired,
-  exitFromEditing: PropTypes.func.isRequired,
-  editCard: PropTypes.func.isRequired,
+  saveEditedCardHandler: PropTypes.func.isRequired,
+  exitFromEditingHandler: PropTypes.func.isRequired,
+  editCardHandler: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   isChecked: PropTypes.bool.isRequired,
 };

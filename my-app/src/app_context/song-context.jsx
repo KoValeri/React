@@ -9,6 +9,7 @@ export const SongContext = createContext({
   deleteSelectedCards: () => {},
   addCard: () => {},
   checkView: () => {},
+  saveEditedCard: () => {},
   viewOnly: false,
 });
 
@@ -36,19 +37,17 @@ export default function SongContextProvider({ children }) {
   }
 
   function updateSelectedCard(id, isChecked) {
-    setSongs(prev => {
-      return prev.map(pr => (id === pr.id ? { ...pr, isChecked } : pr));
-    });
+    setSongs(prevSongs => prevSongs.map(prev => (id === prev.id ? { ...prev, isChecked } : prev)));
   }
 
   function deleteSelectedCards() {
-    setSongs(prev => prev.filter(song => !song.isChecked));
+    setSongs(prevSongs => prevSongs.filter(prev => !prev.isChecked));
   }
 
   function addCard() {
     const newCard = {
       id: uuidv4(),
-      title: 'Song tittle... ',
+      title: 'Song title... ',
       text: `Song text... `,
       isChecked: false,
     };
@@ -57,10 +56,17 @@ export default function SongContextProvider({ children }) {
 
   const count = songs.length;
 
+  function saveEditedCard(id, newTitle, newText) {
+    setSongs(prevSongs =>
+      prevSongs.map(prev => (id === prev.id ? { ...prev, title: newTitle, text: newText } : prev))
+    );
+  }
+
   const ctxValue = {
     updateSelectedCard,
     deleteSelectedCards,
     addCard,
+    saveEditedCard,
     count,
     songs,
     checkView,

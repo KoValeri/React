@@ -1,18 +1,27 @@
 import './App.css';
-import Header from './components/Header/Header.jsx';
-import CardList from './components/CardList/CardList.jsx';
+
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ErrorPage from './pages/ErrorPage.jsx';
+import Home from './pages/Home.jsx';
+import Login from './pages/Login.jsx';
+import RootLayout from './pages/Root.jsx';
 import SongContextProvider from './app_context/song-context.jsx';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [{ path: '/', element: <Home /> }],
+  },
+  { path: '/login', element: <Login /> },
+]);
 
 function App() {
   return (
     <div>
       <SongContextProvider>
-        <Header />
-        <main>
-          <div className="cards-block">
-            <CardList />
-          </div>
-        </main>
+        <RouterProvider router={router} />
       </SongContextProvider>
     </div>
   );

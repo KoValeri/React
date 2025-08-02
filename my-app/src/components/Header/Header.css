@@ -49,27 +49,23 @@
   font-weight: bold;
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-}
-
-.add-card,
-.delete-button {
-  border-radius: 5px;
-  cursor: pointer;
-  width: 70px;
-  height: 41px;
+.links a {
+  text-decoration: none;
   color: black;
+  font-weight: bold;
 }
 
-.add-card {
-  background-color: white;
-  border: solid 2px #a63d40;
-  margin: 0px 20px 0px 0px;
+.links ul {
+  list-style-type: none;
+  display: flex;
 }
 
-.delete-button {
-  background-color: #a63d40;
-  border: none;
+.links li {
+  margin-right: 20px;
+}
+
+.links {
+  width: 273px;
+  display: flex;
+  justify-content: flex-end;
 }
