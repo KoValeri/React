@@ -8,3 +8,29 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin: 0px 0px 40px 55px;
+}
+
+.add-card,
+.delete-button {
+  border-radius: 5px;
+  cursor: pointer;
+  width: 70px;
+  height: 41px;
+  color: black;
+}
+
+.add-card {
+  background-color: white;
+  border: solid 2px #a63d40;
+  margin: 0px 20px 0px 0px;
+}
+
+.delete-button {
+  background-color: #a63d40;
+  border: none;
+}

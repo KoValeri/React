@@ -1,10 +1,10 @@
 import './Header.css';
 import { SongContext } from '../../app_context/song-context.jsx';
 import { useContext } from 'react';
-import ViewOnlyCheckbox from './ViewOnlyCheckbox.jsx';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
-  const { count, deleteSelectedCards, addCard } = useContext(SongContext);
+  const { count } = useContext(SongContext);
 
   return (
     <header className="app-header">
@@ -18,19 +18,16 @@ export default function Header() {
         <h1>Song cards</h1>
       </div>
 
-      <div className="buttons">
-        <ViewOnlyCheckbox />
-        <div>
-          <button className="add-card" onClick={addCard}>
-            Add card
-          </button>
-        </div>
-        <div>
-          <button className="delete-button" onClick={deleteSelectedCards}>
-            Delete
-          </button>
-        </div>
-      </div>
+      <nav className="links">
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/login">Log in</Link>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }

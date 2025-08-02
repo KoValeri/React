@@ -6,7 +6,7 @@ import CardFunctionality from './CardFunctionality.jsx';
 import { SongContext } from '../../app_context/song-context.jsx';
 
 export default function Card({ id, title, text, isChecked }) {
-  const { viewOnly, updateSelectedCard } = useContext(SongContext);
+  const { viewOnly, updateSelectedCard, saveEditedCard } = useContext(SongContext);
 
   const [isEditing, setIsEditing] = useState();
   const [newTitle, setNewTitle] = useState(title);
@@ -18,20 +18,21 @@ export default function Card({ id, title, text, isChecked }) {
     updateSelectedCard(id, event.target.checked);
   }
 
-  function editCard() {
+  function editCardHandler() {
     setIsEditing(true);
     if (isChecked) {
       updateSelectedCard(id, false);
     }
   }
 
-  function saveEditedCard() {
+  function saveEditedCardHandler() {
     setIsEditing(false);
     setPreviousTitle(newTitle);
     setPreviousText(newText);
+    saveEditedCard(id, newTitle, newText);
   }
 
-  function exitFromEditing() {
+  function exitFromEditingHandler() {
     setNewTitle(previousTitle);
     setNewText(previousText);
     setIsEditing(false);
@@ -58,9 +59,9 @@ export default function Card({ id, title, text, isChecked }) {
         checkChange={checkChange}
         isEditing={isEditing}
         viewOnly={viewOnly}
-        saveEditedCard={saveEditedCard}
-        exitFromEditing={exitFromEditing}
-        editCard={editCard}
+        saveEditedCardHandler={saveEditedCardHandler}
+        exitFromEditingHandler={exitFromEditingHandler}
+        editCardHandler={editCardHandler}
         id={id}
         isChecked={isChecked}
       />
