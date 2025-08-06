@@ -51,3 +51,8 @@
 .go-back a {
   color: #d5d4d4ff;
 }
+
+.not-valid {
+  font-size: 10px;
+  color: #a63d40;
+}
