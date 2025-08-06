@@ -43,6 +43,10 @@
   background-color: #d5d4d4ff;
 }
 
+.login-button button:disabled {
+  color: #666;
+}
+
 .go-back {
   display: flex;
   justify-content: center;
