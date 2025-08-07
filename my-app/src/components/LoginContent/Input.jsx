@@ -1,8 +1,11 @@
-export default function Input({ label, id, ...props }) {
+export default function Input({ label, id, error, ...props }) {
   return (
     <>
-      <label htmlFor={id}>{label}</label>
-      <input id={id} {...props} />
+      <div className="login-fields">
+        <label htmlFor={id}>{label}</label>
+        <input id={id} {...props} />
+      </div>
+      <div className="not-valid">{error && <p>{error}</p>}</div>
     </>
   );
 }

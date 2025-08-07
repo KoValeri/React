@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import './Login.css';
 import { useState } from 'react';
 import Input from './Input.jsx';
+import { isEmail, hasLetterAndNumber, hasMinLength } from './validation.js';
 
 export default function LoginContent() {
   const [enteredValues, setEnteredValues] = useState({
@@ -9,7 +10,11 @@ export default function LoginContent() {
     password: '',
   });
 
-  const [notValidPassword, setNotValidPassword] = useState(false);
+  const [notValidField, setNotValidField] = useState({
+    email: false,
+    password: false,
+  });
+
   const [disabledButton, setDisabledButton] = useState(false);
 
   function handleSubmit(event) {
@@ -23,48 +28,68 @@ export default function LoginContent() {
       ...prev,
       [identifier]: value,
     }));
-    setNotValidPassword(false);
+    setNotValidField(prevValid => ({
+      ...prevValid,
+      [identifier]: false,
+    }));
   }
 
-  function handleBlur() {
-    const passwordIsValid = /^(?=.*[a-zA-Z])(?=.*\d)/.test(enteredValues.password);
+  const passwordIsValid =
+    hasLetterAndNumber(enteredValues.password) && hasMinLength(enteredValues.password);
+  const userNameIsValid = isEmail(enteredValues.email);
 
-    if (!passwordIsValid) {
-      setNotValidPassword(true);
-      setDisabledButton(true);
-    } else {
-      setDisabledButton(false);
+  function handleBlur(identifier) {
+    if (identifier === 'email') {
+      if (!userNameIsValid) {
+        setNotValidField(prevValid => ({
+          ...prevValid,
+          [identifier]: true,
+        }));
+        setDisabledButton(true);
+      } else {
+        setDisabledButton(false);
+      }
+    }
+
+    if (identifier === 'password') {
+      if (!passwordIsValid) {
+        setNotValidField(prevValid => ({
+          ...prevValid,
+          [identifier]: true,
+        }));
+        setDisabledButton(true);
+      } else {
+        setDisabledButton(false);
+      }
     }
   }
 
   return (
     <main className="login-main">
       <form onSubmit={handleSubmit}>
-        <div className="login-fields">
-          <Input
-            label="Username"
-            id="email"
-            type="email"
-            value={enteredValues.email}
-            onChange={event => handleInputChange('email', event.target.value)}
-            required
-          />
-        </div>
-        <div className="login-fields">
-          <Input
-            label="Password"
-            id="password"
-            type="password"
-            onBlur={() => handleBlur()}
-            value={enteredValues.password}
-            onChange={event => handleInputChange('password', event.target.value)}
-            minLength={8}
-            required
-          />
-        </div>
-        {notValidPassword ? (
-          <p className="not-valid">Password has to include at least 1 number and 1 letter</p>
-        ) : undefined}
+        <Input
+          label="Username"
+          id="email"
+          type="text"
+          onBlur={() => handleBlur('email')}
+          value={enteredValues.email}
+          onChange={event => handleInputChange('email', event.target.value)}
+          required
+          error={notValidField.email && 'Username should be an email'}
+        />
+        <Input
+          label="Password"
+          id="password"
+          type="password"
+          onBlur={() => handleBlur('password')}
+          value={enteredValues.password}
+          onChange={event => handleInputChange('password', event.target.value)}
+          required
+          error={
+            notValidField.password &&
+            'Password has to include at least 1 number and 1 letter and contain at least 8 symbols'
+          }
+        />
         <div className="login-button">
           <button type="submit" disabled={disabledButton}>
             Login
