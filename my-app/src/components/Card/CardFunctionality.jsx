@@ -21,7 +21,7 @@ export default function CardFunctionality({
             onChange={checkChange}
             checked={isChecked}
           />
-          <label for={`card-checkbox-${id}`}>Choose me!</label>
+          <label htmlFor={`card-checkbox-${id}`}>Choose me!</label>
         </div>
       )}
       {!viewOnly && (

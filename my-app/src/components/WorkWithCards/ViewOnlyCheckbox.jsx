@@ -14,7 +14,7 @@ export default function ViewOnlyCheckbox() {
   return (
     <Div>
       <input id="view-only-checkbox" type="checkbox" onChange={checkView} />
-      <label for="view-only-checkbox">View only</label>
+      <label htmlFor="view-only-checkbox">View only</label>
     </Div>
   );
 }

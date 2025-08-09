@@ -43,6 +43,10 @@
   background-color: #d5d4d4ff;
 }
 
+.login-button button:disabled {
+  color: #666;
+}
+
 .go-back {
   display: flex;
   justify-content: center;
@@ -50,4 +54,9 @@
 
 .go-back a {
   color: #d5d4d4ff;
+}
+
+.not-valid {
+  font-size: 10px;
+  color: #a63d40;
 }
