@@ -5,24 +5,34 @@ import ErrorPage from './pages/ErrorPage.jsx';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import RootLayout from './pages/Root.jsx';
-import SongContextProvider from './app_context/song-context.jsx';
+import CardPage from './pages/CardPage.jsx';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchSongs } from './store/song.js';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
-    children: [{ path: '/', element: <Home /> }],
+    children: [
+      { path: '/', element: <Home /> },
+      { path: '/card/:id', element: <CardPage /> },
+    ],
   },
   { path: '/login', element: <Login /> },
 ]);
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchSongs());
+  }, [dispatch]);
+
   return (
     <div>
-      <SongContextProvider>
-        <RouterProvider router={router} />
-      </SongContextProvider>
+      <RouterProvider router={router} />
     </div>
   );
 }

@@ -28,40 +28,20 @@ export default function LoginContent() {
       ...prev,
       [identifier]: value,
     }));
-    setNotValidField(prevValid => ({
-      ...prevValid,
-      [identifier]: false,
-    }));
   }
 
-  const passwordIsValid =
-    hasLetterAndNumber(enteredValues.password) && hasMinLength(enteredValues.password);
-  const userNameIsValid = isEmail(enteredValues.email);
-
   function handleBlur(identifier) {
-    if (identifier === 'email') {
-      if (!userNameIsValid) {
-        setNotValidField(prevValid => ({
-          ...prevValid,
-          [identifier]: true,
-        }));
-        setDisabledButton(true);
-      } else {
-        setDisabledButton(false);
-      }
-    }
+    const validation = {
+      email: isEmail,
+      password: password => hasLetterAndNumber(password) && hasMinLength(password),
+    };
 
-    if (identifier === 'password') {
-      if (!passwordIsValid) {
-        setNotValidField(prevValid => ({
-          ...prevValid,
-          [identifier]: true,
-        }));
-        setDisabledButton(true);
-      } else {
-        setDisabledButton(false);
-      }
-    }
+    const isValid = validation[identifier](enteredValues[identifier]);
+    setNotValidField(prevValid => ({
+      ...prevValid,
+      [identifier]: !isValid,
+    }));
+    setDisabledButton(!isValid);
   }
 
   return (

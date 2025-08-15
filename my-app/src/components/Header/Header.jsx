@@ -1,10 +1,9 @@
 import './Header.css';
-import { SongContext } from '../../app_context/song-context.jsx';
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
-  const { count } = useContext(SongContext);
+  const count = useSelector(state => state.song.count);
 
   return (
     <header className="app-header">
