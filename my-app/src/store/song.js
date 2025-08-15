@@ -2,6 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
+function typeAndParametres(typeOfAction, actionParams) {
+  console.log(`Redux action - ${typeOfAction};`, 'Parameters passed to the action:', actionParams);
+}
 const initialSongState = { songs: [], count: 0 };
 
 const songSlice = createSlice({
@@ -11,10 +14,12 @@ const songSlice = createSlice({
     setSongs(state, action) {
       state.songs = action.payload;
       state.count = action.payload.length;
+      typeAndParametres(action.type, action.payload);
     },
     updateSelectedCard(state, action) {
       const { id, isChecked } = action.payload;
       state.songs = state.songs.map(song => (id === song.id ? { ...song, isChecked } : song));
+      typeAndParametres(action.type, action.payload);
     },
     deleteSelectedCards(state) {
       state.songs = state.songs.filter(song => !song.isChecked);
@@ -35,6 +40,7 @@ const songSlice = createSlice({
       state.songs = state.songs.map(song =>
         id === song.id ? { ...song, title: newTitle, text: newText } : song
       );
+      typeAndParametres(action.type, action.payload);
     },
   },
 });
