@@ -3,9 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { viewActions } from '../../store/view';
 
 const Div = styled.div`
-  margin: 0px 20px 0px 0px;
+  display: flex;
+  justify-content: center;
   font-weight: bold;
   color: #a63d40;
+
+  #view-only-checkbox {
+    transform: scale(1.5);
+    margin-right: 8px;
+    cursor: pointer;
+  }
 `;
 
 export default function ViewOnlyCheckbox() {

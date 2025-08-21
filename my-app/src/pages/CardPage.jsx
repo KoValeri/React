@@ -9,6 +9,7 @@ export default function CardPage() {
   const dispatch = useDispatch();
   const songs = useSelector(state => state.song.songs);
   const song = songs.find(s => String(s.id) === id);
+  const viewOnly = useSelector(state => state.view.viewOnly);
 
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -29,6 +30,11 @@ export default function CardPage() {
     throw new Response('Not Found', { status: 404 });
   }
 
+  let disabledButton = false;
+  if (viewOnly) {
+    disabledButton = true;
+  }
+
   function editCardHandler() {
     setIsEditing(true);
   }
@@ -37,7 +43,6 @@ export default function CardPage() {
     setIsEditing(false);
     setPreviousTitle(newTitle);
     setPreviousText(newText);
-    // saveEditedCard(song.id, newTitle, newText);
     dispatch(songActions.saveEditedCard({ id: song.id, newTitle, newText }));
   }
 
@@ -82,7 +87,7 @@ export default function CardPage() {
               </button>
             </>
           ) : (
-            <button className="edit-button" onClick={editCardHandler}>
+            <button className="edit-button" onClick={editCardHandler} disabled={disabledButton}>
               Edit
             </button>
           )}

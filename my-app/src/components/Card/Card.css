@@ -37,6 +37,11 @@
   margin: 0px 0px 0px 15px;
 }
 
+.edit-button:disabled {
+  color: #666;
+  border: solid 2px #666;
+}
+
 .edit-button {
   background-color: white;
   color: black;

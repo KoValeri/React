@@ -1,5 +1,4 @@
 import '../../App.css';
-import ViewOnlyCheckbox from './ViewOnlyCheckbox.jsx';
 import { useDispatch } from 'react-redux';
 import { songActions } from '../../store/song.js';
 
@@ -16,7 +15,6 @@ export default function WorkWithCards() {
 
   return (
     <div className="buttons">
-      <ViewOnlyCheckbox />
       <div>
         <button className="add-card" onClick={addCardHandler}>
           Add card

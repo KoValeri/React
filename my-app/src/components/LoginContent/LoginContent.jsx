@@ -1,14 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import { useState } from 'react';
 import Input from './Input.jsx';
 import { isEmail, hasLetterAndNumber, hasMinLength } from './validation.js';
+import { useSelector, useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth.js';
 
 export default function LoginContent() {
-  const [enteredValues, setEnteredValues] = useState({
-    email: '',
-    password: '',
-  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const enteredValues = useSelector(state => state.auth.enteredValues);
 
   const [notValidField, setNotValidField] = useState({
     email: false,
@@ -20,14 +21,11 @@ export default function LoginContent() {
   function handleSubmit(event) {
     event.preventDefault();
     console.log(enteredValues);
-    alert(JSON.stringify(enteredValues));
+    navigate('/');
   }
 
   function handleInputChange(identifier, value) {
-    setEnteredValues(prev => ({
-      ...prev,
-      [identifier]: value,
-    }));
+    dispatch(authActions.setEnteredValues({ identifier, value }));
   }
 
   function handleBlur(identifier) {
