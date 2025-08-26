@@ -1,25 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
-function typeAndParametres(typeOfAction, actionParams) {
-  console.log(`Redux action - ${typeOfAction};`, 'Parameters passed to the action:', actionParams);
-}
+export const fetchSongs = createAsyncThunk('songs/fetchSongs', async () => {
+  try {
+    const response = await axios.get(
+      'https://raw.githubusercontent.com/KoValeri/Data/main/SongData.json'
+    );
+    return response.data;
+  } catch (error) {
+    console.log('Problem with getting list of songs', error);
+  }
+});
+
 const initialSongState = { songs: [], count: 0 };
 
 const songSlice = createSlice({
   name: 'songs',
   initialState: initialSongState,
   reducers: {
-    setSongs(state, action) {
-      state.songs = action.payload;
-      state.count = action.payload.length;
-      typeAndParametres(action.type, action.payload);
-    },
     updateSelectedCard(state, action) {
       const { id, isChecked } = action.payload;
       state.songs = state.songs.map(song => (id === song.id ? { ...song, isChecked } : song));
-      typeAndParametres(action.type, action.payload);
     },
     deleteSelectedCards(state) {
       state.songs = state.songs.filter(song => !song.isChecked);
@@ -40,22 +42,16 @@ const songSlice = createSlice({
       state.songs = state.songs.map(song =>
         id === song.id ? { ...song, title: newTitle, text: newText } : song
       );
-      typeAndParametres(action.type, action.payload);
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(fetchSongs.fulfilled, (state, action) => {
+      state.songs = action.payload;
+      state.count = action.payload.length;
+    });
   },
 });
 
 export const songActions = songSlice.actions;
-
-export const fetchSongs = () => async dispatch => {
-  try {
-    const response = await axios.get(
-      'https://raw.githubusercontent.com/KoValeri/Data/main/SongData.json'
-    );
-    dispatch(songActions.setSongs(response.data));
-  } catch (error) {
-    console.log('Problem with getting list of songs', error);
-  }
-};
 
 export default songSlice.reducer;

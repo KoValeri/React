@@ -1,15 +1,18 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../components/Card/Card.css';
+import './CardPage.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { songActions } from '../store/song';
 
 export default function CardPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const songs = useSelector(state => state.song.songs);
+  const {
+    song: { songs },
+    view: { viewOnly },
+  } = useSelector(state => state);
   const song = songs.find(s => String(s.id) === id);
-  const viewOnly = useSelector(state => state.view.viewOnly);
 
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -30,11 +33,6 @@ export default function CardPage() {
     throw new Response('Not Found', { status: 404 });
   }
 
-  let disabledButton = false;
-  if (viewOnly) {
-    disabledButton = true;
-  }
-
   function editCardHandler() {
     setIsEditing(true);
   }
@@ -53,8 +51,8 @@ export default function CardPage() {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <div className="card" style={{ width: '450px', height: '366px', padding: '20px' }}>
+    <div className="card-block">
+      <div className="the-card">
         {isEditing ? (
           <div className="editing">
             <input type="text" value={newTitle} onChange={e => setNewTitle(e.target.value)} />
@@ -62,12 +60,8 @@ export default function CardPage() {
           </div>
         ) : (
           <div>
-            <h2 className="song-name" style={{ fontSize: '32px' }}>
-              {newTitle}
-            </h2>
-            <p className="song-text" style={{ fontSize: '18px', height: '222px' }}>
-              {newText}
-            </p>
+            <h2 className="the-card-song-name">{newTitle}</h2>
+            <p className="the-card-song-text">{newText}</p>
           </div>
         )}
 
@@ -87,7 +81,7 @@ export default function CardPage() {
               </button>
             </>
           ) : (
-            <button className="edit-button" onClick={editCardHandler} disabled={disabledButton}>
+            <button className="edit-button" onClick={editCardHandler} disabled={viewOnly}>
               Edit
             </button>
           )}

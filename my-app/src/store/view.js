@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-function typeAndParametres(typeOfAction, actionParams) {
-  console.log(`Redux action - ${typeOfAction};`, 'Parameters passed to the action:', actionParams);
-}
-
-const initialViewState = { viewOnly: false };
+const initialViewState = JSON.parse(localStorage.getItem('viewOnlyMode')) || { viewOnly: false };
 
 const viewSlice = createSlice({
   name: 'viewOnly',
@@ -12,7 +8,13 @@ const viewSlice = createSlice({
   reducers: {
     checkView(state, action) {
       state.viewOnly = action.payload;
-      typeAndParametres(action.type, action.payload);
+
+      localStorage.setItem(
+        'viewOnlyMode',
+        JSON.stringify({
+          viewOnly: state.viewOnly,
+        })
+      );
     },
   },
 });

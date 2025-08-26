@@ -9,7 +9,9 @@ import { authActions } from '../../store/auth.js';
 export default function LoginContent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const enteredValues = useSelector(state => state.auth.enteredValues);
+  const {
+    auth: { enteredValues, isLogin },
+  } = useSelector(state => state);
 
   const [notValidField, setNotValidField] = useState({
     email: false,
@@ -21,6 +23,7 @@ export default function LoginContent() {
   function handleSubmit(event) {
     event.preventDefault();
     console.log(enteredValues);
+    dispatch(authActions.userIsLogin(true));
     navigate('/');
   }
 
@@ -44,39 +47,48 @@ export default function LoginContent() {
 
   return (
     <main className="login-main">
-      <form onSubmit={handleSubmit}>
-        <Input
-          label="Username"
-          id="email"
-          type="text"
-          onBlur={() => handleBlur('email')}
-          value={enteredValues.email}
-          onChange={event => handleInputChange('email', event.target.value)}
-          required
-          error={notValidField.email && 'Username should be an email'}
-        />
-        <Input
-          label="Password"
-          id="password"
-          type="password"
-          onBlur={() => handleBlur('password')}
-          value={enteredValues.password}
-          onChange={event => handleInputChange('password', event.target.value)}
-          required
-          error={
-            notValidField.password &&
-            'Password has to include at least 1 number and 1 letter and contain at least 8 symbols'
-          }
-        />
-        <div className="login-button">
-          <button type="submit" disabled={disabledButton}>
-            Login
-          </button>
+      {!isLogin ? (
+        <form onSubmit={handleSubmit}>
+          <Input
+            label="Username"
+            id="email"
+            type="text"
+            onBlur={() => handleBlur('email')}
+            value={enteredValues.email}
+            onChange={event => handleInputChange('email', event.target.value)}
+            required
+            error={notValidField.email && 'Username should be an email'}
+          />
+          <Input
+            label="Password"
+            id="password"
+            type="password"
+            onBlur={() => handleBlur('password')}
+            value={enteredValues.password}
+            onChange={event => handleInputChange('password', event.target.value)}
+            required
+            error={
+              notValidField.password &&
+              'Password has to include at least 1 number and 1 letter and contain at least 8 symbols'
+            }
+          />
+          <div className="login-button">
+            <button type="submit" disabled={disabledButton}>
+              Login
+            </button>
+          </div>
+          <div className="go-back">
+            <Link to="/">Go to home page</Link>
+          </div>
+        </form>
+      ) : (
+        <div>
+          <div className="alredy-logged-in">You are already logged in</div>
+          <div className="go-back">
+            <Link to="/">Go to home page</Link>
+          </div>
         </div>
-        <div className="go-back">
-          <Link to="/">Go to home page</Link>
-        </div>
-      </form>
+      )}
     </main>
   );
 }

@@ -4,11 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth.js';
 
 export default function Header() {
-  const count = useSelector(state => state.song.count);
   const dispatch = useDispatch();
-  const isLogin = useSelector(state => state.auth.isLogin);
-  const userName = useSelector(state => state.auth.enteredValues.email);
-  const isAdmin = useSelector(state => state.auth.isAdmin);
+  const {
+    song: { count },
+    auth: {
+      isLogin,
+      isAdmin,
+      enteredValues: { email },
+    },
+  } = useSelector(state => state);
 
   return (
     <header className="app-header">
@@ -17,7 +21,7 @@ export default function Header() {
           <strong>Number of cards</strong>
           <span className="badge">{count}</span>
         </div>
-        {isLogin && <div className="user">Hello, {userName}</div>}
+        {isLogin && <div className="user">Hello, {email}</div>}
       </div>
       <div className="header-title">
         <h1>Song cards</h1>

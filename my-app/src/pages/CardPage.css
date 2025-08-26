@@ -1,0 +1,73 @@
+.card-block {
+  display: flex;
+  justify-content: center;
+}
+
+.the-card {
+  display: flex;
+  width: 450px;
+  height: 366px;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+
+.the-card-song-name {
+  height: 32px;
+  font-size: 32px;
+}
+
+.the-card-song-text {
+  white-space: pre-line;
+  height: 222px;
+  font-size: 18px;
+  overflow: auto;
+}
+
+.ch-box {
+  justify-content: flex-end;
+  padding: 10px;
+  display: flex;
+}
+
+.edit {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-button,
+.save-button,
+.exit-button {
+  width: 70px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0px 0px 0px 15px;
+}
+
+.edit-button:disabled {
+  color: #666;
+  border: solid 2px #666;
+}
+
+.edit-button {
+  background-color: white;
+  color: black;
+  border: solid 2px #a63d40;
+  padding: 11px 20px;
+}
+
+.save-button {
+  background-color: white;
+  width: 70px;
+  color: black;
+  border: solid 2px black;
+  padding: 10px 15px;
+}
+
+.exit-button {
+  background-color: #a63d40;
+  width: 70px;
+  color: black;
+  border: none;
+  padding: 11px 23px;
+}

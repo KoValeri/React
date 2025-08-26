@@ -15,14 +15,18 @@ const authSlice = createSlice({
     setEnteredValues(state, action) {
       const { identifier, value } = action.payload;
       state.enteredValues[identifier] = value;
-      state.isLogin = true;
 
       if (
         state.enteredValues.email === 'bla@gmail.com' &&
         state.enteredValues.password === 'bla12345'
       ) {
         state.isAdmin = true;
+      } else {
+        state.isAdmin = false;
       }
+    },
+    userIsLogin(state, action) {
+      state.isLogin = action.payload;
 
       localStorage.setItem(
         'user',

@@ -52,7 +52,7 @@ export default function Card({ id, title, text, isChecked }) {
   }, [viewOnly, isEditing, previousTitle, previousText]);
 
   function handleDoubleClick() {
-    if (viewOnly) {
+    if (!isEditing) {
       navigate(`/card/${id}`);
     }
   }
