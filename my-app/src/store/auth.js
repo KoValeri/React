@@ -16,14 +16,9 @@ const authSlice = createSlice({
       const { identifier, value } = action.payload;
       state.enteredValues[identifier] = value;
 
-      if (
+      state.isAdmin =
         state.enteredValues.email === 'bla@gmail.com' &&
-        state.enteredValues.password === 'bla12345'
-      ) {
-        state.isAdmin = true;
-      } else {
-        state.isAdmin = false;
-      }
+        state.enteredValues.password === 'bla12345';
     },
     userIsLogin(state, action) {
       state.isLogin = action.payload;

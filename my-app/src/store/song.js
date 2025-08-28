@@ -3,14 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
 export const fetchSongs = createAsyncThunk('songs/fetchSongs', async () => {
-  try {
-    const response = await axios.get(
-      'https://raw.githubusercontent.com/KoValeri/Data/main/SongData.json'
-    );
-    return response.data;
-  } catch (error) {
-    console.log('Problem with getting list of songs', error);
-  }
+  const response = await axios.get(
+    'https://raw.githubusercontent.com/KoValeri/Data/main/SongData.json'
+  );
+  return response.data;
 });
 
 const initialSongState = { songs: [], count: 0 };
@@ -45,10 +41,14 @@ const songSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchSongs.fulfilled, (state, action) => {
-      state.songs = action.payload;
-      state.count = action.payload.length;
-    });
+    builder
+      .addCase(fetchSongs.fulfilled, (state, action) => {
+        state.songs = action.payload;
+        state.count = action.payload.length;
+      })
+      .addCase(fetchSongs.rejected, (state, action) => {
+        console.error('Error fetching songs:', action.error.message);
+      });
   },
 });
 
