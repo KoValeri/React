@@ -1,12 +1,17 @@
 import './Card.css';
 import PropTypes from 'prop-types';
-import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import CardLyrics from './CardLyrics.jsx';
 import CardFunctionality from './CardFunctionality.jsx';
-import { SongContext } from '../../app_context/song-context.jsx';
+import { useSelector, useDispatch } from 'react-redux';
+import { songActions } from '../../store/song.js';
 
 export default function Card({ id, title, text, isChecked }) {
-  const { viewOnly, updateSelectedCard, saveEditedCard } = useContext(SongContext);
+  const dispatch = useDispatch();
+  const viewOnly = useSelector(state => state.view.viewOnly);
+
+  const navigate = useNavigate();
 
   const [isEditing, setIsEditing] = useState();
   const [newTitle, setNewTitle] = useState(title);
@@ -15,13 +20,13 @@ export default function Card({ id, title, text, isChecked }) {
   const [previousText, setPreviousText] = useState(text);
 
   function checkChange(event) {
-    updateSelectedCard(id, event.target.checked);
+    dispatch(songActions.updateSelectedCard({ id, isChecked: event.target.checked }));
   }
 
   function editCardHandler() {
     setIsEditing(true);
     if (isChecked) {
-      updateSelectedCard(id, false);
+      dispatch(songActions.updateSelectedCard({ id, isChecked: false }));
     }
   }
 
@@ -29,7 +34,7 @@ export default function Card({ id, title, text, isChecked }) {
     setIsEditing(false);
     setPreviousTitle(newTitle);
     setPreviousText(newText);
-    saveEditedCard(id, newTitle, newText);
+    dispatch(songActions.saveEditedCard({ id, newTitle, newText }));
   }
 
   function exitFromEditingHandler() {
@@ -46,8 +51,18 @@ export default function Card({ id, title, text, isChecked }) {
     }
   }, [viewOnly, isEditing, previousTitle, previousText]);
 
+  function handleDoubleClick() {
+    if (!isEditing) {
+      navigate(`/card/${id}`);
+    }
+  }
+
   return (
-    <div className="card" style={{ backgroundColor: isChecked ? '#a63d40' : 'white' }}>
+    <div
+      className="card"
+      style={{ backgroundColor: isChecked ? '#a63d40' : 'white' }}
+      onDoubleClick={handleDoubleClick}
+    >
       <CardLyrics
         isEditing={isEditing}
         newTitle={newTitle}
@@ -55,6 +70,7 @@ export default function Card({ id, title, text, isChecked }) {
         setNewTitle={setNewTitle}
         setNewText={setNewText}
       />
+
       <CardFunctionality
         checkChange={checkChange}
         isEditing={isEditing}
@@ -72,6 +88,6 @@ export default function Card({ id, title, text, isChecked }) {
 Card.propTypes = {
   title: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   isChecked: PropTypes.bool.isRequired,
 };

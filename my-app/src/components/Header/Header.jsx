@@ -1,18 +1,27 @@
 import './Header.css';
-import { SongContext } from '../../app_context/song-context.jsx';
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth.js';
 
 export default function Header() {
-  const { count } = useContext(SongContext);
+  const dispatch = useDispatch();
+  const {
+    song: { count },
+    auth: {
+      isLogin,
+      isAdmin,
+      enteredValues: { email },
+    },
+  } = useSelector(state => state);
 
   return (
     <header className="app-header">
-      <div style={{ width: '273px' }}>
+      <div className="count-and-user">
         <div className="card-badge">
           <strong>Number of cards</strong>
           <span className="badge">{count}</span>
         </div>
+        {isLogin && <div className="user">Hello, {email}</div>}
       </div>
       <div className="header-title">
         <h1>Song cards</h1>
@@ -24,8 +33,19 @@ export default function Header() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/login">Log in</Link>
+            {isLogin ? (
+              <Link to="/" onClick={() => dispatch(authActions.logOut())}>
+                Logout
+              </Link>
+            ) : (
+              <Link to="/login">Login</Link>
+            )}
           </li>
+          {isAdmin && (
+            <li>
+              <Link to="/settings">Settings</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

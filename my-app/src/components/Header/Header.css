@@ -6,6 +6,17 @@
   margin: 0px 0px 20px 0px;
 }
 
+.count-and-user {
+  width: 505px;
+  display: flex;
+  align-items: center;
+}
+
+.user {
+  color: black;
+  font-weight: bold;
+}
+
 .header-title {
   flex-grow: 1;
   display: flex;
@@ -60,12 +71,13 @@
   display: flex;
 }
 
+.user,
 .links li {
-  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .links {
-  width: 273px;
+  width: 505px;
   display: flex;
   justify-content: flex-end;
 }

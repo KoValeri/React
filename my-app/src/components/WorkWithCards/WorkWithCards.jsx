@@ -1,21 +1,27 @@
 import '../../App.css';
-import { SongContext } from '../../app_context/song-context.jsx';
-import { useContext } from 'react';
-import ViewOnlyCheckbox from './ViewOnlyCheckbox.jsx';
+import { useDispatch } from 'react-redux';
+import { songActions } from '../../store/song.js';
 
 export default function WorkWithCards() {
-  const { deleteSelectedCards, addCard } = useContext(SongContext);
+  const dispatch = useDispatch();
+
+  function addCardHandler() {
+    dispatch(songActions.addCard());
+  }
+
+  function deleteSelectedCardsHandler() {
+    dispatch(songActions.deleteSelectedCards());
+  }
 
   return (
     <div className="buttons">
-      <ViewOnlyCheckbox />
       <div>
-        <button className="add-card" onClick={addCard}>
+        <button className="add-card" onClick={addCardHandler}>
           Add card
         </button>
       </div>
       <div>
-        <button className="delete-button" onClick={deleteSelectedCards}>
+        <button className="delete-button" onClick={deleteSelectedCardsHandler}>
           Delete
         </button>
       </div>
