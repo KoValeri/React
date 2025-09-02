@@ -1,7 +1,7 @@
 import './Card.css';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import CardLyrics from './CardLyrics.jsx';
 import CardFunctionality from './CardFunctionality.jsx';
 import { useSelector, useDispatch } from 'react-redux';
@@ -42,14 +42,6 @@ export default function Card({ id, title, text, isChecked }) {
     setNewText(previousText);
     setIsEditing(false);
   }
-
-  useEffect(() => {
-    if (viewOnly && isEditing) {
-      setIsEditing(false);
-      setNewTitle(previousTitle);
-      setNewText(previousText);
-    }
-  }, [viewOnly, isEditing, previousTitle, previousText]);
 
   function handleDoubleClick() {
     if (!isEditing) {
